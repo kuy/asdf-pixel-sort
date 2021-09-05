@@ -1,6 +1,6 @@
-use crate::{color::to_gray, finder};
+use crate::{color::PColor, finder};
 
-pub(crate) fn sort_column(buf: &mut image::RgbImage, x: u32, black: u32) {
+pub(crate) fn sort_column(buf: &mut image::RgbImage, x: u32, black: &PColor) {
     let height = buf.height();
 
     let mut y = 0;
@@ -22,7 +22,7 @@ pub(crate) fn sort_column(buf: &mut image::RgbImage, x: u32, black: u32) {
             line.push(*pixel);
         }
 
-        line.sort_by(|a, b| to_gray(a).cmp(&to_gray(b)));
+        line.sort_by(|a, b| PColor::from(*a).cmp(&(*b).into()));
 
         for i in 0..len {
             let pixel = line.get(i as usize).unwrap();
@@ -33,7 +33,7 @@ pub(crate) fn sort_column(buf: &mut image::RgbImage, x: u32, black: u32) {
     }
 }
 
-pub(crate) fn sort_row(buf: &mut image::RgbImage, y: u32, black: u32) {
+pub(crate) fn sort_row(buf: &mut image::RgbImage, y: u32, black: &PColor) {
     let width = buf.width();
 
     let mut x = 0;
@@ -55,7 +55,7 @@ pub(crate) fn sort_row(buf: &mut image::RgbImage, y: u32, black: u32) {
             line.push(*pixel);
         }
 
-        line.sort_by(|a, b| to_gray(a).cmp(&to_gray(b)));
+        line.sort_by(|a, b| PColor::from(*a).cmp(&(*b).into()));
 
         for i in 0..len {
             let pixel = line.get(i as usize).unwrap();
