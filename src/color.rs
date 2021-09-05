@@ -1,5 +1,5 @@
 /// Representation of a color with Processing compatible
-#[derive(Clone, Eq, PartialEq, PartialOrd)]
+#[derive(Clone, Eq, PartialEq)]
 pub struct PColor {
     pub red: u8,
     pub green: u8,
@@ -31,6 +31,12 @@ impl std::fmt::Debug for PColor {
 impl std::cmp::Ord for PColor {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         self.val().cmp(&other.val())
+    }
+}
+
+impl std::cmp::PartialOrd for PColor {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
     }
 }
 
