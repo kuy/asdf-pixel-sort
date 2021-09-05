@@ -7,6 +7,10 @@ repository = "https://github.com/kuy/asdf-pixel-sort"
 homepage = "https://github.com/kuy/asdf-pixel-sort"
 license = "MIT"
 edition = "2018"
+exclude = [
+    ".github/*",
+    "assets/*",
+]
 
 [dependencies]
 image = { version = "0.23", default-features = false }
