@@ -61,6 +61,7 @@ impl PColor {
     /// # Example
     ///
     /// ```
+    /// # use asdf_pixel_sort::PColor;
     /// let color = PColor::new(11, 220, 0).with_alpha(128);
     /// ```
     pub fn with_alpha(mut self, alpha: u8) -> Self {
