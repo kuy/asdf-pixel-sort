@@ -23,3 +23,19 @@ pub fn sort_with_options(buf: &mut RgbImage, options: &Options) {
         sorter::sort_row(buf, row, options);
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_sort_with_options() {
+        let mut actual = image::open("tests/p1.bmp").unwrap().to_rgb8();
+        let options = Options {
+            mode: Mode::black(),
+        };
+        sort_with_options(&mut actual, &options);
+        let expected = image::open("tests/p1.expected.bmp").unwrap().to_rgb8();
+        assert!(expected.as_raw() == actual.as_raw());
+    }
+}

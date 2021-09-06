@@ -4,14 +4,18 @@ version = "0.0.5"
 description = "ASDF pixel sorting"
 authors = ["Yuki Kodama<endflow.net@gmail.com>"]
 repository = "https://github.com/kuy/asdf-pixel-sort"
-homepage = "https://github.com/kuy/asdf-pixel-sort"
+homepage = "https://crates.io/crates/asdf-pixel-sort"
 license = "MIT"
 edition = "2018"
 exclude = [
     ".github/*",
     "assets/*",
+    "tests/*",
 ]
 
 [dependencies]
-image = { version = "0.23", default-features = false }
+image = { version = "0.23.14", default-features = false }
 once_cell = "1.8.0"
+
+[dev-dependencies]
+image = { version = "0.23.14", default-features = false, features = ["bmp"] }
