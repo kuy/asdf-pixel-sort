@@ -47,6 +47,14 @@ impl From<image::Rgb<u8>> for PColor {
 }
 
 impl PColor {
+    /// Creates a new `PColor` struct with RGB.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// # use asdf_pixel_sort::PColor;
+    /// let color = PColor::new(32, 32, 32);
+    /// ```
     pub fn new(red: u8, green: u8, blue: u8) -> Self {
         Self {
             red,
