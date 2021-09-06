@@ -34,6 +34,10 @@ fn main() {
 
 You may also need [`image`](https://crates.io/crates/image) crate to run above code.
 
+## Documentation
+
+See [documentation](https://docs.rs/asdf-pixel-sort) on docs.rs.
+
 ## Changelogs
 
 See [releases](https://github.com/kuy/asdf-pixel-sort/releases) page on GitHub.
