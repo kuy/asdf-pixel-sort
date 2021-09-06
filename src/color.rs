@@ -77,9 +77,14 @@ impl PColor {
         self
     }
 
-    /// Returns `int` representation of `color` type in Processing.
+    /// Computes a color value of Processing.
     pub fn val(&self) -> i32 {
         i32::from_be_bytes([self.alpha, self.red, self.green, self.blue])
+    }
+
+    /// Computes a brightness value of Processing between `0` to `255`.
+    pub fn brightness(&self) -> u8 {
+        todo!()
     }
 }
 

@@ -1,5 +1,6 @@
-use crate::PColor;
 use image::RgbImage;
+
+use crate::PColor;
 
 pub(crate) fn get_first_not_black_x(
     buf: &RgbImage,
@@ -96,6 +97,7 @@ pub(crate) fn get_next_black_y(buf: &RgbImage, x: u32, y_start: u32, black: &PCo
 #[cfg(test)]
 mod tests {
     use super::*;
+
     use image::ImageBuffer;
     use once_cell::sync::Lazy;
 
