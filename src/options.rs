@@ -1,5 +1,6 @@
-use crate::PColor;
 use once_cell::sync::Lazy;
+
+use crate::PColor;
 
 /// Options to configure behaviours.
 #[derive(Debug, Eq, PartialEq)]
