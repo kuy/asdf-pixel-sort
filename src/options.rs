@@ -1,9 +1,10 @@
 use crate::PColor;
 use once_cell::sync::Lazy;
 
-#[derive(Debug, Eq, PartialEq)]
 /// Options to configure behaviours.
+#[derive(Debug, Eq, PartialEq)]
 pub struct Options {
+    /// Sorting mode.
     pub mode: Mode,
 }
 
