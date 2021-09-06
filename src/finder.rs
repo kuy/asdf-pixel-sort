@@ -1,4 +1,4 @@
-use crate::color::PColor;
+use crate::PColor;
 use image::RgbImage;
 
 pub(crate) fn get_first_not_black_x(

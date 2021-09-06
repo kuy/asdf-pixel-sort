@@ -1,6 +1,11 @@
-use crate::{color::PColor, finder};
+use crate::{color::PColor, finder, Mode, Options};
 
-pub(crate) fn sort_column(buf: &mut image::RgbImage, x: u32, black: &PColor) {
+pub(crate) fn sort_column(buf: &mut image::RgbImage, x: u32, options: &Options) {
+    let black = match &options.mode {
+        Mode::Black(color) => color,
+        _ => panic!("TODO: not black mode"),
+    };
+
     let height = buf.height();
 
     let mut y = 0;
@@ -33,7 +38,12 @@ pub(crate) fn sort_column(buf: &mut image::RgbImage, x: u32, black: &PColor) {
     }
 }
 
-pub(crate) fn sort_row(buf: &mut image::RgbImage, y: u32, black: &PColor) {
+pub(crate) fn sort_row(buf: &mut image::RgbImage, y: u32, options: &Options) {
+    let black = match &options.mode {
+        Mode::Black(color) => color,
+        _ => panic!("TODO: not black mode"),
+    };
+
     let width = buf.width();
 
     let mut x = 0;
