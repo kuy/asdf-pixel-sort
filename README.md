@@ -8,6 +8,36 @@ Rust implementation of pixel sorting algorithm "ASDF" by [Kim Asendorf](http://k
 
 ![sample](./assets/sample.png)
 
+## Usage
+
+```toml
+asdf-pixel-sort = "0.0.5"
+```
+
+## Example
+
+```rust
+use asdf_pixel_sort::{sort_with_options, Mode, Options};
+
+fn main() {
+    let img = image::open("pic.jpg").unwrap();
+    let mut buf = img.to_rgb8();
+
+    let options = Options {
+        mode: Mode::black(),
+    };
+    sort_with_options(&mut buf, &options);
+
+    buf.save("sorted.jpg").unwrap();
+}
+```
+
+You may also need [`image`](https://crates.io/crates/image) crate to run above code.
+
+## Changelogs
+
+See [releases](https://github.com/kuy/asdf-pixel-sort/releases) page on GitHub.
+
 ## License
 
 MIT
