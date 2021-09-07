@@ -46,6 +46,12 @@ impl From<image::Rgb<u8>> for PColor {
     }
 }
 
+impl From<i32> for PColor {
+    fn from(c: i32) -> Self {
+        PColor::from_raw(c)
+    }
+}
+
 impl PColor {
     /// Creates a new `PColor` struct with RGB.
     ///
@@ -64,6 +70,32 @@ impl PColor {
         }
     }
 
+    /// Creates a new `PColor` struct from a signed integer.
+    /// This function expects an internal representation of Processing's RGB color.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// # use asdf_pixel_sort::PColor;
+    /// let color = PColor::new(11, 220, 0);
+    /// assert_eq!(color, PColor::from_raw(-16000000));
+    /// assert_eq!(color, color.as_raw().into());
+    /// ```
+    ///
+    /// # Inverse operation
+    ///
+    /// [`PColor::from_raw()`] method is an inverse operation for [`PColor::as_raw()`] function.
+    ///
+    /// ```
+    /// # use asdf_pixel_sort::PColor;
+    /// let value = -13000000;
+    /// assert_eq!(value, PColor::from_raw(value).as_raw());
+    /// ```
+    pub fn from_raw(color: i32) -> Self {
+        let bytes = color.to_be_bytes();
+        Self::new(bytes[1], bytes[2], bytes[3]).with_alpha(bytes[0])
+    }
+
     /// Sets alpha value.
     ///
     /// # Example
@@ -79,7 +111,27 @@ impl PColor {
 
     /// Returns an internal representation of Processing's RGB color as a signed integer.
     ///
-    /// ref. https://processing.org/reference/color_datatype.html
+    /// Ref. https://processing.org/reference/color_datatype.html
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// # use asdf_pixel_sort::PColor;
+    /// let color = PColor::new(11, 220, 0);
+    /// assert_eq!(color.as_raw(), -16000000);
+    /// assert_eq!(color, color.as_raw().into());
+    /// ```
+    ///
+    /// # Inverse operation
+    ///
+    /// [`PColor::as_raw()`] method is an inverse operation for [`PColor::from_raw()`] function.
+    ///
+    /// ```
+    /// # use asdf_pixel_sort::PColor;
+    /// let color = PColor::new(11, 220, 0);
+    /// assert_eq!(color, color.as_raw().into());
+    /// assert_eq!(color, PColor::from_raw(color.as_raw())); // Same above
+    /// ```
     pub fn as_raw(&self) -> i32 {
         i32::from_be_bytes([self.alpha, self.red, self.green, self.blue])
     }
@@ -114,6 +166,25 @@ mod tests {
             alpha: 255,
         };
         assert_eq!(expected, PColor::new(0, 127, 255));
+    }
+
+    #[test]
+    fn test_pcolor_from_raw() {
+        let expected = PColor {
+            red: 11,
+            green: 220,
+            blue: 0,
+            alpha: 255,
+        };
+        assert_eq!(expected, PColor::from_raw(-16000000));
+
+        let expected = PColor {
+            red: 57,
+            green: 162,
+            blue: 192,
+            alpha: 255,
+        };
+        assert_eq!(expected, PColor::from_raw(-13000000));
     }
 
     #[test]
