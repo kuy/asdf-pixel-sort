@@ -30,7 +30,7 @@ impl std::fmt::Debug for PColor {
 
 impl std::cmp::Ord for PColor {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        self.val().cmp(&other.val())
+        self.as_raw().cmp(&other.as_raw())
     }
 }
 
@@ -77,8 +77,10 @@ impl PColor {
         self
     }
 
-    /// Computes a color value of Processing.
-    pub fn val(&self) -> i32 {
+    /// Returns an internal representation of Processing's RGB color as a signed integer.
+    ///
+    /// ref. https://processing.org/reference/color_datatype.html
+    pub fn as_raw(&self) -> i32 {
         i32::from_be_bytes([self.alpha, self.red, self.green, self.blue])
     }
 
@@ -128,10 +130,10 @@ mod tests {
     #[test]
     fn test_pcolor_val() {
         let expected = -16000000;
-        assert_eq!(expected, PColor::new(11, 220, 0).val());
+        assert_eq!(expected, PColor::new(11, 220, 0).as_raw());
 
         let expected = -13000000;
-        assert_eq!(expected, PColor::new(57, 162, 192).val());
+        assert_eq!(expected, PColor::new(57, 162, 192).as_raw());
     }
 
     #[test]
