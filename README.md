@@ -11,7 +11,7 @@ Rust implementation of pixel sorting algorithm "ASDF" by [Kim Asendorf](http://k
 ## Usage
 
 ```toml
-asdf-pixel-sort = "0.0.5"
+asdf-pixel-sort = "0.0.6"
 ```
 
 ## Example
