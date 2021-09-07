@@ -3,7 +3,7 @@ use once_cell::sync::Lazy;
 use crate::PColor;
 
 /// Options to configure behaviours.
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Options {
     /// Sorting mode.
     pub mode: Mode,
@@ -18,7 +18,7 @@ impl Default for Options {
 }
 
 /// Sorting modes.
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub enum Mode {
     /// Black mode with a threshold color.
     Black(PColor),
