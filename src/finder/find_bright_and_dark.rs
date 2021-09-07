@@ -190,7 +190,7 @@ mod tests {
         let data = [
             255, 0, 255, //
             0, 0, 196, //
-            0, 16, 16, //
+            0, 60, 0, //
             60, 0, 0, //
             8, 8, 8, //
             196, 196, 196, //
@@ -202,7 +202,7 @@ mod tests {
         assert_eq!(actual, 1);
 
         let actual = get_next_dark_y(&buf, 0, 2, BRIGHTNESS);
-        assert_eq!(actual, 3, "same with initial position");
+        assert_eq!(actual, 2, "same with initial position");
 
         let actual = get_next_dark_y(&buf, 0, 5, BRIGHTNESS);
         assert_eq!(actual, 6, "not found");

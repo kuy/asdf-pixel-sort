@@ -5,8 +5,8 @@ use crate::Mode;
 mod find_black;
 mod find_bright_and_dark;
 
-pub(crate) use find_black::*;
-pub(crate) use find_bright_and_dark::*;
+use find_black::*;
+use find_bright_and_dark::*;
 
 pub(crate) fn get_first_x(buf: &RgbImage, x_start: u32, y: u32, mode: &Mode) -> Option<u32> {
     match mode {

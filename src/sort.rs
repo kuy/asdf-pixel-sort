@@ -27,13 +27,23 @@ mod tests {
     use crate::Mode;
 
     #[test]
+    fn test_sort() {
+        let mut actual = image::open("tests/p1.bmp").unwrap().to_rgb8();
+        sort(&mut actual);
+        let expected = image::open("tests/p1-brightness_default.bmp")
+            .unwrap()
+            .to_rgb8();
+        assert!(expected.as_raw() == actual.as_raw());
+    }
+
+    #[test]
     fn test_sort_with_options() {
         let mut actual = image::open("tests/p1.bmp").unwrap().to_rgb8();
         let options = Options {
             mode: Mode::black(),
         };
         sort_with_options(&mut actual, &options);
-        let expected = image::open("tests/p1.expected.bmp").unwrap().to_rgb8();
+        let expected = image::open("tests/p1-black_default.bmp").unwrap().to_rgb8();
         assert!(expected.as_raw() == actual.as_raw());
     }
 }
