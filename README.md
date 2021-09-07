@@ -17,22 +17,29 @@ asdf-pixel-sort = "0.0.5"
 ## Example
 
 ```rust
-use asdf_pixel_sort::{sort_with_options, Mode, Options};
+use asdf_pixel_sort::sort;
 
 fn main() {
     let img = image::open("pic.jpg").unwrap();
     let mut buf = img.to_rgb8();
 
-    let options = Options {
-        mode: Mode::black(),
-    };
-    sort_with_options(&mut buf, &options);
+    sort(&mut buf);
 
     buf.save("sorted.jpg").unwrap();
 }
 ```
 
 You may also need [`image`](https://crates.io/crates/image) crate to run above code.
+
+Use `sort_with_options()` function to configure with options.
+
+```rust
+let color = PColor::new(0, 62, 214);
+let options = Options {
+    mode: Mode::Black(color),
+};
+sort_with_options(&mut buf, &options);
+```
 
 ## Documentation
 
