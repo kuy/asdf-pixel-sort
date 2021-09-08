@@ -137,12 +137,12 @@ mod tests {
     fn test_get_next_dark_x() {
         let data = [
             255, 255, 255, //
-            32, 196, 0, //
+            32, 192, 0, //
             0, 60, 0, //
-            0, 0, 0, //
-            8, 255, 8, //
-            196, 196, 196, //
-            196, 196, 196, //
+            0, 0, 61, //
+            8, 0, 8, //
+            192, 192, 192, //
+            192, 192, 192, //
         ];
         let buf: RgbImage = ImageBuffer::from_raw(7, 1, Vec::from(&data[..])).unwrap();
 
@@ -150,9 +150,9 @@ mod tests {
         assert_eq!(actual, 1);
 
         let actual = get_next_dark_x(&buf, 2, 0, BRIGHTNESS);
-        assert_eq!(actual, 2, "skip start position even if it's dark");
+        assert_eq!(actual, 3, "skip start position even if it's dark");
 
-        let actual = get_next_dark_x(&buf, 3, 0, BRIGHTNESS);
+        let actual = get_next_dark_x(&buf, 4, 0, BRIGHTNESS);
         assert_eq!(actual, 6, "not found");
 
         let actual = get_next_dark_x(&buf, 6, 0, BRIGHTNESS);
@@ -189,25 +189,25 @@ mod tests {
     fn test_get_next_dark_y() {
         let data = [
             255, 0, 255, //
-            0, 0, 196, //
+            0, 0, 192, //
             0, 60, 0, //
-            60, 0, 0, //
+            61, 0, 0, //
             8, 8, 8, //
-            196, 196, 196, //
-            196, 196, 196, //
+            192, 192, 192, //
+            192, 192, 192, //
         ];
         let buf: RgbImage = ImageBuffer::from_raw(1, 7, Vec::from(&data[..])).unwrap();
 
         let actual = get_next_dark_y(&buf, 0, 0, BRIGHTNESS);
-        assert_eq!(actual, 1);
+        assert_eq!(1, actual);
 
         let actual = get_next_dark_y(&buf, 0, 2, BRIGHTNESS);
-        assert_eq!(actual, 2, "same with initial position");
+        assert_eq!(3, actual, "skip start position even if it's dark");
 
         let actual = get_next_dark_y(&buf, 0, 5, BRIGHTNESS);
-        assert_eq!(actual, 6, "not found");
+        assert_eq!(6, actual, "not found");
 
         let actual = get_next_dark_y(&buf, 0, 6, BRIGHTNESS);
-        assert_eq!(actual, 6, "out of bounds");
+        assert_eq!(6, actual, "out of bounds");
     }
 }

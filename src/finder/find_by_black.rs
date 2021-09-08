@@ -121,7 +121,7 @@ mod tests {
         assert_eq!(actual, Some(2));
 
         let actual = get_first_not_black_x(&buf, 3, 0, &BLACK);
-        assert_eq!(actual, Some(3), "same with initial position");
+        assert_eq!(actual, Some(3), "same with start position");
 
         let actual = get_first_not_black_x(&buf, 4, 0, &BLACK);
         assert_eq!(actual, None, "not found");
@@ -148,7 +148,7 @@ mod tests {
         assert_eq!(actual, 1);
 
         let actual = get_next_black_x(&buf, 2, 0, &BLACK);
-        assert_eq!(actual, 3, "same with initial position");
+        assert_eq!(actual, 3, "skip start position even if it's black");
 
         let actual = get_next_black_x(&buf, 5, 0, &BLACK);
         assert_eq!(actual, 6, "not found");
@@ -173,7 +173,7 @@ mod tests {
         assert_eq!(actual, Some(2));
 
         let actual = get_first_not_black_y(&buf, 0, 3, &BLACK);
-        assert_eq!(actual, Some(3), "same with initial position");
+        assert_eq!(actual, Some(3), "same with start position");
 
         let actual = get_first_not_black_y(&buf, 0, 4, &BLACK);
         assert_eq!(actual, None, "not found");
@@ -200,7 +200,7 @@ mod tests {
         assert_eq!(actual, 1);
 
         let actual = get_next_black_y(&buf, 0, 2, &BLACK);
-        assert_eq!(actual, 3, "same with initial position");
+        assert_eq!(actual, 3, "skip start position even if it's black");
 
         let actual = get_next_black_y(&buf, 0, 5, &BLACK);
         assert_eq!(actual, 6, "not found");

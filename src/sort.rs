@@ -37,13 +37,24 @@ mod tests {
     }
 
     #[test]
-    fn test_sort_with_options() {
+    fn test_sort_with_options_black() {
         let mut actual = image::open("tests/p1.bmp").unwrap().to_rgb8();
         let options = Options {
             mode: Mode::black(),
         };
         sort_with_options(&mut actual, &options);
         let expected = image::open("tests/p1-black_default.bmp").unwrap().to_rgb8();
+        assert!(expected.as_raw() == actual.as_raw());
+    }
+
+    #[test]
+    fn test_sort_with_options_white() {
+        let mut actual = image::open("tests/p1.bmp").unwrap().to_rgb8();
+        let options = Options {
+            mode: Mode::white(),
+        };
+        sort_with_options(&mut actual, &options);
+        let expected = image::open("tests/p1-white_default.bmp").unwrap().to_rgb8();
         assert!(expected.as_raw() == actual.as_raw());
     }
 }
