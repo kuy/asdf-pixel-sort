@@ -8,9 +8,10 @@ pub(crate) fn get_first_not_black_x(
     y: u32,
     black: &PColor,
 ) -> Option<u32> {
+    let width = buf.width();
     let mut x = x_start;
 
-    while x < buf.width() {
+    while x < width {
         let pixel = buf.get_pixel(x, y);
         if *black <= (*pixel).into() {
             break; // found non-black pixel
@@ -18,7 +19,7 @@ pub(crate) fn get_first_not_black_x(
 
         x += 1;
 
-        if buf.width() <= x {
+        if width <= x {
             return None;
         }
     }
@@ -52,9 +53,10 @@ pub(crate) fn get_first_not_black_y(
     y_start: u32,
     black: &PColor,
 ) -> Option<u32> {
+    let height = buf.height();
     let mut y = y_start;
 
-    if y < buf.height() {
+    if y < height {
         loop {
             let pixel = buf.get_pixel(x, y);
             if *black <= (*pixel).into() {
@@ -63,7 +65,7 @@ pub(crate) fn get_first_not_black_y(
 
             y += 1;
 
-            if buf.height() <= y {
+            if height <= y {
                 return None;
             }
         }
