@@ -17,6 +17,15 @@ impl Default for Options {
     }
 }
 
+/// Default value of [`Mode::Black`].
+pub static DEFAULT_BLACK: Lazy<PColor> = Lazy::new(|| PColor::new(11, 220, 0));
+
+/// Default value of [`Mode::Brightness`].
+pub static DEFAULT_BRIGHTNESS: u8 = 60;
+
+/// Default value of [`Mode::White`].
+pub static DEFAULT_WHITE: Lazy<PColor> = Lazy::new(|| PColor::new(57, 162, 192));
+
 /// Sorting modes.
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum Mode {
@@ -35,10 +44,6 @@ impl Default for Mode {
         Self::brightness()
     }
 }
-
-pub static DEFAULT_BLACK: Lazy<PColor> = Lazy::new(|| PColor::new(11, 220, 0));
-pub static DEFAULT_BRIGHTNESS: u8 = 60;
-pub static DEFAULT_WHITE: Lazy<PColor> = Lazy::new(|| PColor::new(57, 162, 192));
 
 impl Mode {
     /// Black mode with a default threshold.
