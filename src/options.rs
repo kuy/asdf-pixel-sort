@@ -36,9 +36,9 @@ impl Default for Mode {
     }
 }
 
-static DEFAULT_BLACK: Lazy<PColor> = Lazy::new(|| PColor::new(11, 220, 0));
-static DEFAULT_BRIGHTNESS: u8 = 60;
-static DEFAULT_WHITE: Lazy<PColor> = Lazy::new(|| PColor::new(57, 162, 192));
+pub static DEFAULT_BLACK: Lazy<PColor> = Lazy::new(|| PColor::new(11, 220, 0));
+pub static DEFAULT_BRIGHTNESS: u8 = 60;
+pub static DEFAULT_WHITE: Lazy<PColor> = Lazy::new(|| PColor::new(57, 162, 192));
 
 impl Mode {
     /// Black mode with a default threshold.
