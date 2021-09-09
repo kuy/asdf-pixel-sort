@@ -3,18 +3,13 @@ use once_cell::sync::Lazy;
 use crate::PColor;
 
 /// Options to configure behaviours.
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Default, Eq, PartialEq)]
 pub struct Options {
     /// Sorting mode.
     pub mode: Mode,
-}
 
-impl Default for Options {
-    fn default() -> Self {
-        Self {
-            mode: Default::default(),
-        }
-    }
+    /// Sorting direction.
+    pub direction: Direction,
 }
 
 /// Default value of [`Mode::Black`].
@@ -62,6 +57,25 @@ impl Mode {
     }
 }
 
+/// Sorting direction.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum Direction {
+    /// Both column and row.
+    Both,
+
+    /// Only column.
+    Column,
+
+    /// Only row.
+    Row,
+}
+
+impl Default for Direction {
+    fn default() -> Self {
+        Direction::Both
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -70,6 +84,7 @@ mod tests {
     fn test_options_default() {
         let expected = Options {
             mode: Mode::Brightness(60),
+            direction: Direction::Both,
         };
         assert_eq!(expected, Options::default());
     }
@@ -78,6 +93,12 @@ mod tests {
     fn test_mode_default() {
         let expected = Mode::Brightness(60);
         assert_eq!(expected, Mode::default());
+    }
+
+    #[test]
+    fn test_direction_default() {
+        let expected = Direction::Both;
+        assert_eq!(expected, Direction::default());
     }
 
     #[test]

@@ -41,6 +41,7 @@ mod tests {
         let mut actual = image::open("tests/p1.bmp").unwrap().to_rgb8();
         let options = Options {
             mode: Mode::black(),
+            ..Default::default()
         };
         sort_with_options(&mut actual, &options);
         let expected = image::open("tests/p1-black_default.bmp").unwrap().to_rgb8();
@@ -52,6 +53,7 @@ mod tests {
         let mut actual = image::open("tests/p1.bmp").unwrap().to_rgb8();
         let options = Options {
             mode: Mode::white(),
+            ..Default::default()
         };
         sort_with_options(&mut actual, &options);
         let expected = image::open("tests/p1-white_default.bmp").unwrap().to_rgb8();
