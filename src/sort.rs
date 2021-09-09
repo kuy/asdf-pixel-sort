@@ -12,12 +12,16 @@ pub fn sort(buf: &mut RgbImage) {
 
 /// Sorts pixels in the given image with options
 pub fn sort_with_options(buf: &mut RgbImage, options: &Options) {
-    for col in 0..buf.width() {
-        sort_column(buf, col, options);
+    if options.direction.has_column() {
+        for col in 0..buf.width() {
+            sort_column(buf, col, options);
+        }
     }
 
-    for row in 0..buf.height() {
-        sort_row(buf, row, options);
+    if options.direction.has_row() {
+        for row in 0..buf.height() {
+            sort_row(buf, row, options);
+        }
     }
 }
 

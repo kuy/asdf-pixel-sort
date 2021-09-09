@@ -76,6 +76,24 @@ impl Default for Direction {
     }
 }
 
+impl Direction {
+    /// Checks if this direction has [`Direction::Column`].
+    pub fn has_column(&self) -> bool {
+        match self {
+            Self::Both | Self::Column => true,
+            _ => false,
+        }
+    }
+
+    /// Checks if this direction has [`Direction::Row`].
+    pub fn has_row(&self) -> bool {
+        match self {
+            Self::Both | Self::Row => true,
+            _ => false,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -93,12 +111,6 @@ mod tests {
     fn test_mode_default() {
         let expected = Mode::Brightness(60);
         assert_eq!(expected, Mode::default());
-    }
-
-    #[test]
-    fn test_direction_default() {
-        let expected = Direction::Both;
-        assert_eq!(expected, Direction::default());
     }
 
     #[test]
@@ -120,5 +132,25 @@ mod tests {
         let color = PColor::new(57, 162, 192);
         let expected = Mode::White(color);
         assert_eq!(expected, Mode::white());
+    }
+
+    #[test]
+    fn test_direction_default() {
+        let expected = Direction::Both;
+        assert_eq!(expected, Direction::default());
+    }
+
+    #[test]
+    fn test_direction_has_column() {
+        assert!(Direction::Both.has_column());
+        assert!(Direction::Column.has_column());
+        assert!(!Direction::Row.has_column());
+    }
+
+    #[test]
+    fn test_direction_has_row() {
+        assert!(Direction::Both.has_row());
+        assert!(!Direction::Column.has_row());
+        assert!(Direction::Row.has_row());
     }
 }
