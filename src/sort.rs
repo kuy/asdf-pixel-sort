@@ -29,38 +29,30 @@ pub fn sort_with_options(buf: &mut RgbImage, options: &Options) {
 mod tests {
     use super::*;
     use crate::Mode;
+    use helper::*;
 
     #[test]
     fn test_sort() {
-        let mut actual = image::open("tests/p1.bmp").unwrap().to_rgb8();
-        sort(&mut actual);
-        let expected = image::open("tests/p1-brightness_default.bmp")
-            .unwrap()
-            .to_rgb8();
-        assert!(expected.as_raw() == actual.as_raw());
+        assert_sort!("p1", "brightness_default");
     }
 
     #[test]
     fn test_sort_with_options_black() {
-        let mut actual = image::open("tests/p1.bmp").unwrap().to_rgb8();
         let options = Options {
             mode: Mode::black(),
             ..Default::default()
         };
-        sort_with_options(&mut actual, &options);
-        let expected = image::open("tests/p1-black_default.bmp").unwrap().to_rgb8();
-        assert!(expected.as_raw() == actual.as_raw());
+
+        assert_sort_with_options!("p1", "black_default", &options);
     }
 
     #[test]
     fn test_sort_with_options_white() {
-        let mut actual = image::open("tests/p1.bmp").unwrap().to_rgb8();
         let options = Options {
             mode: Mode::white(),
             ..Default::default()
         };
-        sort_with_options(&mut actual, &options);
-        let expected = image::open("tests/p1-white_default.bmp").unwrap().to_rgb8();
-        assert!(expected.as_raw() == actual.as_raw());
+
+        assert_sort_with_options!("p1", "white_default", &options);
     }
 }
