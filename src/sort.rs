@@ -28,7 +28,7 @@ pub fn sort_with_options(buf: &mut RgbImage, options: &Options) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::Mode;
+    use crate::{Direction, Mode};
     use helper::*;
 
     #[test]
@@ -54,5 +54,25 @@ mod tests {
         };
 
         assert_sort_with_options!("p1", "white_default", &options);
+    }
+
+    #[test]
+    fn test_sort_with_options_column() {
+        let options = Options {
+            direction: Direction::Column,
+            ..Default::default()
+        };
+
+        assert_sort_with_options!("p1", "column", &options);
+    }
+
+    #[test]
+    fn test_sort_with_options_row() {
+        let options = Options {
+            direction: Direction::Row,
+            ..Default::default()
+        };
+
+        assert_sort_with_options!("p1", "row", &options);
     }
 }
