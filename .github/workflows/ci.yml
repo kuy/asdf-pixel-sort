@@ -40,7 +40,7 @@ jobs:
           components: clippy
 
       - name: Cache/restore cargo
-        uses: actions/cache@v3
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/bin/
